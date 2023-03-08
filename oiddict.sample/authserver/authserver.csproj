@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>aspnet-authserver-1101A0CE-6810-461B-837B-F9FD72F129B3</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.3"/>
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.3"/>
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.3"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.3"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.3"/>
+    </ItemGroup>
+
+</Project>
