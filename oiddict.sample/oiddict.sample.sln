@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "authserver", "authserver\au
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "resourceserver", "resourceserver\resourceserver.csproj", "{48798071-3A4B-46EA-97B0-9C3DEA0CF003}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "client.mvc", "client.mvc\client.mvc.csproj", "{956598BA-0D7C-4C5B-B33C-C70503FD292E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "clients", "clients", "{41CF2847-B39F-463E-962A-F069307125B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,12 @@ Global
 		{48798071-3A4B-46EA-97B0-9C3DEA0CF003}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48798071-3A4B-46EA-97B0-9C3DEA0CF003}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48798071-3A4B-46EA-97B0-9C3DEA0CF003}.Release|Any CPU.Build.0 = Release|Any CPU
+		{956598BA-0D7C-4C5B-B33C-C70503FD292E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{956598BA-0D7C-4C5B-B33C-C70503FD292E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{956598BA-0D7C-4C5B-B33C-C70503FD292E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{956598BA-0D7C-4C5B-B33C-C70503FD292E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{956598BA-0D7C-4C5B-B33C-C70503FD292E} = {41CF2847-B39F-463E-962A-F069307125B2}
 	EndGlobalSection
 EndGlobal
