@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "client.mvc", "client.mvc\cl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "clients", "clients", "{41CF2847-B39F-463E-962A-F069307125B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "console.client", "console.client\console.client.csproj", "{9E6347C8-8F57-4FE5-B7C4-D8B5045188A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "client.console", "client.console\client.console.csproj", "{9E6347C8-8F57-4FE5-B7C4-D8B5045188A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

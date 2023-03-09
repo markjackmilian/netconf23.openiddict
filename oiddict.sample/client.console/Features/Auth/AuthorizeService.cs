@@ -1,6 +1,7 @@
+using System.Diagnostics;
 using System.Text.Json;
 
-namespace console.client.Features.Auth;
+namespace client.console.Features.Auth;
 
 class AuthorizeService
 {
@@ -33,7 +34,8 @@ class AuthorizeService
         
         var readAsStringAsync = await response.Content.ReadAsStringAsync();
         var tokenResponse = JsonSerializer.Deserialize<TokenResponse>(readAsStringAsync);
-        
+
+        Debug.Assert(tokenResponse != null, nameof(tokenResponse) + " != null");
         return tokenResponse.AccessToken;
     }
 }

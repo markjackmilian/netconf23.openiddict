@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace console.client.Features.Auth;
+namespace client.console.Features.Auth;
 
 class TokenResponse
 {

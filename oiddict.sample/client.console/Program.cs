@@ -1,9 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.Text.Json;
-using console.client;
-using console.client.Features.Auth;
-using console.client.Features.Weather;
+using client.console;
+using client.console.Features.Auth;
+using client.console.Features.Weather;
 
 var authService = new AuthorizeService();
 var token = await authService.GetToken();

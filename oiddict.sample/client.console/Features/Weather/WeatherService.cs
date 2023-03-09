@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace console.client.Features.Weather;
+namespace client.console.Features.Weather;
 
 public class WeatherService
 {
@@ -23,6 +23,7 @@ public class WeatherService
         using var dataresponse = await this._client.SendAsync(datarequest);
         var asStringAsync = await dataresponse.Content.ReadAsStringAsync();
         var deserialized = JsonSerializer.Deserialize<WeatherForecast[]>(asStringAsync);
-        return deserialized;
+        if (deserialized != null) return deserialized;
+        throw new Exception("Deserialization failed");
     }
 }
