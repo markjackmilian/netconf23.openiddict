@@ -91,7 +91,7 @@ class Worker : IHostedService
                 ClientSecret = "arealsecret!!",
                 RedirectUris =
                 {
-                    new Uri("https://localhost:7206/v1/callback")
+                    new Uri("https://localhost:7206/signin-oidc")
                 },
                 Permissions =
                 {
