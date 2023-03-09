@@ -1,0 +1,323 @@
+{
+	"info": {
+		"_postman_id": "a8f9dc28-fd98-4cae-b80b-77918342374a",
+		"name": "OpenIddict Sample",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15698957"
+	},
+	"item": [
+		{
+			"name": "Client Credentials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"var token = jsonData['access_token']; ",
+							"pm.collectionVariables.set(\"access_token\", token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "console",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "388D45FA-B36B-4988-BA59-B187D329C207",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{authorization_server}}/connect/token",
+					"host": [
+						"{{authorization_server}}"
+					],
+					"path": [
+						"connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Client Credentials Refresh",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"var token = jsonData['access_token']; ",
+							"var refreshToken = jsonData['refresh_token']; ",
+							"pm.collectionVariables.set(\"access_token\", token);",
+							"pm.collectionVariables.set(\"refresh_token\", refreshToken);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "offline_access",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "console2",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "388D45FA-B36B-4988-BA59-B187D329C207",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{authorization_server}}/connect/token",
+					"host": [
+						"{{authorization_server}}"
+					],
+					"path": [
+						"connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"var token = jsonData['access_token']; ",
+							"var refreshToken = jsonData['refresh_token']; ",
+							"pm.collectionVariables.set(\"access_token\", token);",
+							"pm.collectionVariables.set(\"refresh_token\", refreshToken);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "refresh_token",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "offline_access",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "console2",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "388D45FA-B36B-4988-BA59-B187D329C207",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "{{refresh_token}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{authorization_server}}/connect/token",
+					"host": [
+						"{{authorization_server}}"
+					],
+					"path": [
+						"connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Weather",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{resource_server}}/WeatherForecast",
+					"host": [
+						"{{resource_server}}"
+					],
+					"path": [
+						"WeatherForecast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Weather AuthCode",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "state",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "offline_access",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "web-client",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "{{authorization_server}}/connect/token",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "{{authorization_server}}/connect/authorize",
+							"type": "string"
+						},
+						{
+							"key": "useBrowser",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code_with_pkce",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "authcode_token",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{resource_server}}/WeatherForecast",
+					"host": [
+						"{{resource_server}}"
+					],
+					"path": [
+						"WeatherForecast"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "access_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "refresh_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "authorization_server",
+			"value": "https://localhost:7251",
+			"type": "string"
+		},
+		{
+			"key": "resource_server",
+			"value": "https://localhost:7284",
+			"type": "string"
+		}
+	]
+}
