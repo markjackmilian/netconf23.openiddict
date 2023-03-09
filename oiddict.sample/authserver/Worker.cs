@@ -47,6 +47,71 @@ class Worker : IHostedService
                 }
             });
         }
+        
+        if (await manager.FindByClientIdAsync("web-client") is null)
+        {
+            await manager.CreateAsync(new OpenIddictApplicationDescriptor
+            {
+                ClientId = "web-client",
+                ConsentType = OpenIddictConstants.ConsentTypes.Explicit,
+                DisplayName = "web client application",
+                Type = OpenIddictConstants.ClientTypes.Public,
+                RedirectUris =
+                {
+                    new Uri("https://oauth.pstmn.io/v1/callback")
+                },
+                Permissions =
+                {
+                    OpenIddictConstants.Permissions.Endpoints.Authorization,
+                    OpenIddictConstants.Permissions.Endpoints.Logout,
+                    OpenIddictConstants.Permissions.Endpoints.Token,
+                    OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode,
+                    OpenIddictConstants.Permissions.GrantTypes.RefreshToken,
+                    OpenIddictConstants.Permissions.ResponseTypes.Code,
+                    OpenIddictConstants.Permissions.Scopes.Email,
+                    OpenIddictConstants.Permissions.Scopes.Profile,
+                    OpenIddictConstants.Permissions.Scopes.Roles,
+                   
+                },
+                Requirements =
+                {
+                    OpenIddictConstants.Requirements.Features.ProofKeyForCodeExchange
+                }
+            });
+        }
+        
+        if (await manager.FindByClientIdAsync("mvc-client") is null)
+        {
+            await manager.CreateAsync(new OpenIddictApplicationDescriptor
+            {
+                ClientId = "mvc-client",
+                ConsentType = OpenIddictConstants.ConsentTypes.Implicit,
+                DisplayName = "mvc client application",
+                Type = OpenIddictConstants.ClientTypes.Confidential,
+                ClientSecret = "arealsecret!!",
+                RedirectUris =
+                {
+                    new Uri("https://localhost:7206/v1/callback")
+                },
+                Permissions =
+                {
+                    OpenIddictConstants.Permissions.Endpoints.Authorization,
+                    OpenIddictConstants.Permissions.Endpoints.Logout,
+                    OpenIddictConstants.Permissions.Endpoints.Token,
+                    OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode,
+                    OpenIddictConstants.Permissions.GrantTypes.RefreshToken,
+                    OpenIddictConstants.Permissions.ResponseTypes.Code,
+                    OpenIddictConstants.Permissions.Scopes.Email,
+                    OpenIddictConstants.Permissions.Scopes.Profile,
+                    OpenIddictConstants.Permissions.Scopes.Roles,
+                   
+                },
+                Requirements =
+                {
+                    OpenIddictConstants.Requirements.Features.ProofKeyForCodeExchange
+                }
+            });
+        }
     }
 
     public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;

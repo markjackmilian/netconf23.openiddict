@@ -29,10 +29,13 @@ builder.Services.AddOpenIddict()
     {
         // Enable the token endpoint.
         options.SetTokenEndpointUris("connect/token");
+        options.SetAuthorizationEndpointUris("connect/authorize");
 
         // Enable the client credentials flow.
         options.AllowClientCredentialsFlow()
-            .AllowRefreshTokenFlow();
+            .AllowRefreshTokenFlow()
+            .AllowAuthorizationCodeFlow()
+            .RequireProofKeyForCodeExchange();
 
         options.SetAccessTokenLifetime(TimeSpan.FromSeconds(30));
         options.SetRefreshTokenLifetime(TimeSpan.FromMinutes(30));
@@ -45,7 +48,9 @@ builder.Services.AddOpenIddict()
 
         // Register the ASP.NET Core host and configure the ASP.NET Core options.
         options.UseAspNetCore()
-            .EnableTokenEndpointPassthrough();
+            .EnableTokenEndpointPassthrough()
+            .EnableAuthorizationEndpointPassthrough()
+            .EnableUserinfoEndpointPassthrough();
     })
 
     // Register the OpenIddict validation components.
