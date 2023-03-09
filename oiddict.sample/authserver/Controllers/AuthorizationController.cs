@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using OpenIddict.Abstractions;
@@ -18,6 +19,23 @@ public class AuthorizationController : Controller
     public async Task<IActionResult> Exchange()
     {
         var request = HttpContext.GetOpenIddictServerRequest();
+        if (request == null)
+            throw new Exception("Cannot get OpenIddict request");
+
+        if (request.IsRefreshTokenGrantType())
+        {
+            var result = await HttpContext.AuthenticateAsync(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+            if (!result.Succeeded)
+                throw new Exception("Cannot refresh token");
+
+            var refreshIdentity = new ClaimsIdentity(result.Principal.Claims,
+                authenticationType: TokenValidationParameters.DefaultAuthenticationType,
+                nameType: OpenIddictConstants.Claims.Name,
+                roleType: OpenIddictConstants.Claims.Role);
+
+            return SignIn(new ClaimsPrincipal(refreshIdentity), OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+        }
+
         if (!request.IsClientCredentialsGrantType())
         {
             throw new NotImplementedException("The specified grant is not implemented.");
@@ -42,7 +60,8 @@ public class AuthorizationController : Controller
         ;
 
         identity.SetDestinations(claim => new[] { OpenIddictConstants.Destinations.IdentityToken });
-
+        
+        identity.SetScopes(request.GetScopes());
 
         return SignIn(new ClaimsPrincipal(identity), OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
     }
